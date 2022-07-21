@@ -8,7 +8,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
 
   const fetchData = async () => {
-    const response = await axios.get("https://backenddelivero.herokuapp.com/")
+    const response = await axios.get("https://backend-delivero.herokuapp.com/")
     setData(response.data)
     setIsLoading(false)
   }
