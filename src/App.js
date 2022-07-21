@@ -8,7 +8,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
 
   const fetchData = async () => {
-    const response = await axios.get("https://backend-delivero.herokuapp.com/")
+    const response = await axios.get("http://localhost:4000/")
     setData(response.data)
     setIsLoading(false)
   }
@@ -24,6 +24,29 @@ function App() {
       <header>
         <Header name={data.restaurant.name} description={"Profitez de chaque plaisir de la vie quotidienne. Le Pain Quotidien propose des ingrédients simples et sains, du bon pain, des fruits et des légumes frais et de saison issus de l’agriculture biologique."} picture={"https://f.roocdn.com/images/menus/17697/header-image.jpg"} />
       </header>
+      <main>
+        {data.categories.map((categorie, index) => {
+          return (
+            categorie.meals.length > 0 && (
+              <section>
+                <h2>{categorie.name}</h2>
+
+                {categorie.meals.map((meal, index) => {
+                  return (
+                    <>
+                      <h3>{meal.title}</h3>
+                      <p>{meal.description}</p>
+                      <p> {meal.price} € </p>
+                      {meal.popular && <span className="popular">popular</span>}
+                      {meal.picture ? <img src={meal.picture} alt="meal" /> : " "}
+                    </>
+                  )
+                })}
+              </section>
+            )
+          )
+        })}
+      </main>
     </>
   )
 }
