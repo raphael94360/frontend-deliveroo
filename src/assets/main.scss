@@ -1,0 +1,11 @@
+.section {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+}
+
+.meals {
+  width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+}
