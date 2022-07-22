@@ -1,54 +1,53 @@
-import "./App.scss"
-import Header from "./components/Header"
-import axios from "axios"
-import { useState, useEffect } from "react"
+import "./App.scss";
+import Header from "./components/Header";
+import Section from "./components/Section";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [data, setData] = useState({})
-  const [isLoading, setIsLoading] = useState(true)
+  const [data, setData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [string, setString] = useState("");
 
   const fetchData = async () => {
-    const response = await axios.get("http://localhost:4000/")
-    setData(response.data)
-    setIsLoading(false)
-  }
+    const response = await axios.get("http://localhost:4000/");
+    setData(response.data);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   return isLoading ? (
     <span> En cours de chargement... </span>
   ) : (
     <>
       <header>
-        <Header name={data.restaurant.name} description={"Profitez de chaque plaisir de la vie quotidienne. Le Pain Quotidien propose des ingrédients simples et sains, du bon pain, des fruits et des légumes frais et de saison issus de l’agriculture biologique."} picture={"https://f.roocdn.com/images/menus/17697/header-image.jpg"} />
+        <Header
+          name={data.restaurant.name}
+          description={
+            "Profitez de chaque plaisir de la vie quotidienne. Le Pain Quotidien propose des ingrédients simples et sains, du bon pain, des fruits et des légumes frais et de saison issus de l’agriculture biologique."
+          }
+          picture={"https://f.roocdn.com/images/menus/17697/header-image.jpg"}
+        />
       </header>
-      <main>
+      <main className='container'>
         {data.categories.map((categorie, index) => {
           return (
             categorie.meals.length > 0 && (
-              <section>
-                <h2>{categorie.name}</h2>
-
-                {categorie.meals.map((meal, index) => {
-                  return (
-                    <>
-                      <h3>{meal.title}</h3>
-                      <p>{meal.description}</p>
-                      <p> {meal.price} € </p>
-                      {meal.popular && <span className="popular">popular</span>}
-                      {meal.picture ? <img src={meal.picture} alt="meal" /> : " "}
-                    </>
-                  )
-                })}
-              </section>
+              <Section
+                categorie={categorie}
+                key={index}
+                setString={setString}
+                string={string}
+              />
             )
-          )
+          );
         })}
       </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

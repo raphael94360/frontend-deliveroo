@@ -1,11 +1,57 @@
-.section {
-  max-width: 800px;
-  display: flex;
-  flex-direction: column;
-}
+main {
+  section {
+    max-width: 820px;
+    margin-top: 20px;
 
-.meals {
-  width: 300px;
-  display: flex;
-  flex-wrap: wrap;
+    h2 {
+      font-size: 24px;
+      color: #2e3333;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .meals-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .meals-content {
+      width: 400px;
+      display: flex;
+      flex-direction: row;
+      background-color: white;
+      padding: 15px;
+      border-radius: 5px;
+      gap: 1rem;
+
+      &--right {
+        h3 {
+          font-size: 18px;
+          padding-bottom: 10px;
+        }
+        p {
+          font-size: 14px;
+          line-height: 18px;
+          padding-bottom: 15px;
+
+          span {
+            color: orange;
+            font-weight: bold;
+            width: 30px;
+            cursor: pointer;
+          }
+        }
+      }
+
+      &--left {
+        img {
+          width: 134px;
+          height: 134px;
+          object-fit: cover;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
 }
